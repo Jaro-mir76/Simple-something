@@ -29,9 +29,28 @@
 		6E84460C2E4B8F3E0034C5C9 /* Simple-somethingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simple-somethingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6E84463D2E4C7D370034C5C9 /* Exceptions for "Simple-something" folder in "Simple-somethingTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Engines/CoreDataStack.swift,
+				Engines/NavigationManager.swift,
+				Engines/PreviewHelper.swift,
+				Model.xcdatamodeld,
+				Views/ChatContentView.swift,
+				Views/ChatEditView.swift,
+				Views/MessageView.swift,
+			);
+			target = 6E8446012E4B8F3E0034C5C9 /* Simple-somethingTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6E8445F72E4B8F3C0034C5C9 /* Simple-something */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6E84463D2E4C7D370034C5C9 /* Exceptions for "Simple-something" folder in "Simple-somethingTests" target */,
+			);
 			path = "Simple-something";
 			sourceTree = "<group>";
 		};

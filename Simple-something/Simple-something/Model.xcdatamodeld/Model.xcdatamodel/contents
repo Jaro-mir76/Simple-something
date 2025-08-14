@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Author" representedClassName="Author" syncable="YES">
+        <attribute name="authorID" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="authorMessages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="messageAuthor" inverseEntity="Message"/>
+    </entity>
+    <entity name="Chat" representedClassName="Chat" syncable="YES">
+        <attribute name="latestUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="chatMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="chat" inverseEntity="Message"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="content" attributeType="String"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="chat" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="chatMessages" inverseEntity="Chat"/>
+        <relationship name="messageAuthor" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="authorMessages" inverseEntity="Author"/>
+    </entity>
+</model>

@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct Simple_somethingApp: App {
+    @State private var coreDataStack = CoreDataStack.shared
+    @State private var navigationManager = NavigationManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environment(\.managedObjectContext, coreDataStack.persistentContainer.viewContext)
+                .environment(navigationManager)
         }
     }
 }
