@@ -45,7 +45,15 @@ struct ChatContentView: View {
         }
         Form {
             HStack {
-                TextField("Enter message here...", text: $messageContent)
+                TextField ("Enter message here...", text: $messageContent)
+                    .onSubmit{
+                        if !messageContent.isEmpty {
+                            withAnimation {
+                                addMessage()
+                            }
+                            isFocused = true
+                        }
+                    }
                     .focused($isFocused)
                     .task {
                         isFocused = true
