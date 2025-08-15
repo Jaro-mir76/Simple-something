@@ -10,8 +10,13 @@ import Foundation
 @Observable
 class NavigationManager {
     var chatToEdit: Chat?
+    var userName: String
+    var userId: String
+    let defaultUserName = "Anonymous"
     
-    init(chatToEdit: Chat? = nil) {
+    init(chatToEdit: Chat? = nil, userName: String = "Anonymous", userId: String = "") {
         self.chatToEdit = chatToEdit
+        self.userName = userName
+        self.userId = userId
     }
 }

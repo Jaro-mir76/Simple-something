@@ -40,6 +40,7 @@
 				Views/ChatContentView.swift,
 				Views/ChatEditView.swift,
 				Views/MessageView.swift,
+				Views/SettingsView.swift,
 			);
 			target = 6E8446012E4B8F3E0034C5C9 /* Simple-somethingTests */;
 		};

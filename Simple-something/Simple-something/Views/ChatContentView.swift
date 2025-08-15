@@ -11,6 +11,7 @@ import CoreData
 struct ChatContentView: View {
     var chat: Chat
     
+    @Environment(NavigationManager.self) private var navigationManager
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest
     private var messages: FetchedResults<Message>
@@ -79,8 +80,13 @@ struct ChatContentView: View {
         newMessage.date = .now
         newMessage.chat = chat
         newMessage.messageAuthor = Author(context: viewContext)
-        newMessage.messageAuthor?.name = "Jaro"
-        newMessage.messageAuthor?.authorID = "JaroID"
+        if navigationManager.userName.isEmpty {
+            newMessage.messageAuthor?.name = navigationManager.defaultUserName
+        } else {
+            newMessage.messageAuthor?.name = navigationManager.userName
+        }
+        
+        newMessage.messageAuthor?.authorID = navigationManager.userId
         
         do {
             try viewContext.save()
@@ -113,4 +119,5 @@ struct ChatContentView: View {
 #Preview {
     ChatContentView(chat: .preview)
         .environment(\.managedObjectContext, PreviewHelper.preview.container.viewContext)
+        .environment(NavigationManager())
 }

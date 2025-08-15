@@ -50,6 +50,14 @@ struct MainView: View {
             }
             .navigationTitle("Chats")
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                    }
+
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
                         navigationManager.chatToEdit = nil
@@ -88,4 +96,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environment(NavigationManager())
 }

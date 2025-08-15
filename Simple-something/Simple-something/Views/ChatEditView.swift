@@ -11,6 +11,7 @@ struct ChatEditView: View {
     var chat: Chat?
     
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(NavigationManager.self) private var navigationManager
     @Environment(\.dismiss) private var dismiss
     @State private var chatName = ""
     
@@ -69,4 +70,5 @@ struct ChatEditView: View {
 
 #Preview {
     ChatEditView()
+        .environment(NavigationManager())
 }
