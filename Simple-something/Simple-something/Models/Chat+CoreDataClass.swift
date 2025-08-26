@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 @objc(Chat)
+@Observable
 public class Chat: NSManagedObject {
 
 }

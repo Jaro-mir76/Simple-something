@@ -44,33 +44,34 @@ struct ChatContentView: View {
                 }
             }
         }
-        Form {
-            HStack {
-                TextField ("Enter message here...", text: $messageContent)
-                    .onSubmit{
-                        if !messageContent.isEmpty {
-                            withAnimation {
-                                addMessage()
-                            }
-                            isFocused = true
+        HStack {
+            TextField ("Enter message here...", text: $messageContent)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit{
+                    if !messageContent.isEmpty {
+                        withAnimation {
+                            addMessage()
                         }
-                    }
-                    .focused($isFocused)
-                    .task {
                         isFocused = true
                     }
-                Button(action: {
-                    withAnimation {
-                        addMessage()
-                    }
-                }) {
-                    Image(systemName: "plus.circle.fill")
-                        .accessibilityLabel("Add message")
                 }
-                .disabled(messageContent.isEmpty)
+                .focused($isFocused)
+                .task {
+                    isFocused = true
+                }
+            Button(action: {
+                withAnimation {
+                    addMessage()
+                }
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .accessibilityLabel("Add message")
             }
+            .disabled(messageContent.isEmpty)
         }
-        .frame(maxHeight: 80)
+        .padding()
+        .frame(maxHeight: 60)
+        .background(.gray.opacity(0.1))
         .navigationTitle(chat.name ?? "No name chat")
     }
     
@@ -108,12 +109,6 @@ struct ChatContentView: View {
             fatalError("Could not save contex after deleting message: \(error.localizedDescription)")
         }
     }
-    
-//    func scrollToBottom(messages: [Message], proxy: ScrollViewProxy){
-//        if let lastMessage = messages.last {
-//            proxy.scrollTo(lastMessage.id)
-//        }
-//    }
 }
 
 #Preview {

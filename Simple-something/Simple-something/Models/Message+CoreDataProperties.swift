@@ -2,7 +2,7 @@
 //  Message+CoreDataProperties.swift
 //  Simple-something
 //
-//  Created by Jaromir Jagieluk on 13.08.2025.
+//  Created by Jaromir Jagieluk on 19.08.2025.
 //
 //
 

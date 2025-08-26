@@ -13,12 +13,17 @@ struct ChatEditView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(NavigationManager.self) private var navigationManager
     @Environment(\.dismiss) private var dismiss
+    @FocusState private var isFocused: Bool
     @State private var chatName = ""
     
     var body: some View {
         Form {
             Section {
                 TextField("Enter name here", text: $chatName)
+                    .focused($isFocused)
+                    .task {
+                        isFocused = true
+                    }
             } header: {
                 Text("Chat title")
             }
@@ -50,21 +55,22 @@ struct ChatEditView: View {
             if chat == nil {
                 let newChat = Chat(context: viewContext)
                 newChat.name = chatName
-                newChat.latestUpdate = .now
+                newChat.latestUpdate = Date()
             } else {
                 chat!.name = chatName
+                chat!.latestUpdate = Date()
             }
             saveContext()
         }
     }
     
     private func saveContext() {
-        do {
-            try viewContext.save()
-        } catch {
-//            consider better error management
-            fatalError("Failed to save data (Core Data): \(error)")
-        }
+//        do {
+        viewContext.customeSave()
+//        } catch {
+////            consider better error management
+//            fatalError("Failed to save data (Core Data): \(error)")
+//        }
     }
 }
 

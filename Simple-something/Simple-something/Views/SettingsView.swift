@@ -15,7 +15,7 @@ struct SettingsView: View {
     var body: some View {
         @Bindable var navigationManager = navigationManager
 
-        if navigationManager.userName.isEmpty {
+        if navigationManager.userName == navigationManager.defaultUserName {
             Text("Hello \(navigationManager.defaultUserName)\n")
             Text("Seems you didn't set your name yet.")
             Text("You can do it down below.")

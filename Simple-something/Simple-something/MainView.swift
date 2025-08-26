@@ -10,17 +10,24 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(NavigationManager.self) private var navigationManager
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.latestUpdate, order: .reverse)], animation: .default)
+    @FetchRequest
     private var chats: FetchedResults<Chat>
     @State private var selectedChat: Chat?
+
     @State private var showAddChat = false
+    @Environment(\.refresh) private var refreshAction
+    @StateObject private var refreshPerformer = CustomeRefreshPerformer()
+    
+    init() {
+        _chats = FetchRequest<Chat>(sortDescriptors: [SortDescriptor(\.latestUpdate, order: .reverse)])
+    }
     
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChat) {
                 ForEach(chats) { chat in
                     NavigationLink(value: chat) {
-                        Text(chat.name ?? "no name")
+                        ChatListView(chat: chat)
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button {
                                     deleteChat(chat)
@@ -28,7 +35,6 @@ struct MainView: View {
                                     Label("Delete", systemImage: "minus.circle")
                                 }
                                 .tint(.red)
-
                             }
                             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                 Button {
@@ -42,6 +48,9 @@ struct MainView: View {
                     }
                 }
             }
+//            .refreshable {
+//                navigationManager.refreshTest()
+//            }
             .overlay {
                 if chats.isEmpty {
                     Text("There is not chats, you can create one using + button.")
@@ -68,6 +77,7 @@ struct MainView: View {
                     }
                 }
             }
+            
         } detail: {
             if let selectedChat = selectedChat {
                 NavigationStack {
@@ -87,7 +97,7 @@ struct MainView: View {
         viewContext.delete(chat)
         do {
             try viewContext.save()
-            print ("successfully saved context after deleting chat")
+//            print ("successfully saved context after deleting chat")
         } catch {
             fatalError("Could not save contex after deleting chat: \(error.localizedDescription)")
         }

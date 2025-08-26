@@ -11,7 +11,7 @@ import CoreData
 struct PreviewHelper {
     
     init(inMemory: Bool = false){
-        container = NSPersistentContainer(name: "Model")
+        container = NSPersistentCloudKitContainer(name: "Model")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
             container.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
@@ -43,7 +43,7 @@ struct PreviewHelper {
         return result
     }()
     
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
     
    
 }
